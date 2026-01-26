@@ -38,8 +38,8 @@ class CategoriesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // padding: EdgeInsets.zero, // не працює
-      // primary: false,           // не працює
+      // padding: EdgeInsets.zero, // не працює, не прибирає паддінги
+      primary: false, // не працює
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

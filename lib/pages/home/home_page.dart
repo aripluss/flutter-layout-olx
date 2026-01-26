@@ -58,21 +58,24 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: whiteBodyColor,
-        hintText: 'Що шукаєте?',
-        hintStyle: const TextStyle(
-          color: placeholderColor,
-          fontSize: fontSize16,
+    return SizedBox(
+      height: 48,
+      child: TextField(
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: whiteBodyColor,
+          hintText: 'Що шукаєте?',
+          hintStyle: const TextStyle(
+            color: placeholderColor,
+            fontSize: fontSize14,
+          ),
+          suffixIcon: SuffixIcon(),
+          border: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(4),
+          ),
+          contentPadding: const EdgeInsets.all(padding16),
         ),
-        suffixIcon: SuffixIcon(),
-        border: OutlineInputBorder(
-          borderSide: BorderSide.none,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        contentPadding: const EdgeInsets.all(padding16),
       ),
     );
   }
@@ -84,10 +87,12 @@ class SuffixIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(4),
       decoration: BoxDecoration(
         color: textColor,
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(4), // верхній лівий кут
+          bottomRight: Radius.circular(4), // нижній лівий кут
+        ),
       ),
       child: IconButton(
         icon: const Icon(Icons.search, color: Colors.white),
