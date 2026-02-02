@@ -39,7 +39,7 @@ class CategoriesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       // padding: EdgeInsets.zero, // не працює, не прибирає паддінги
-      primary: false, // не працює
+      primary: false,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
