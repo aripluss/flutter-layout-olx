@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
 
 class BottomNav extends StatelessWidget {
-  const BottomNav({super.key});
+  final int currentIndex;
+  final ValueChanged<int> onTap;
+
+  const BottomNav({super.key, required this.currentIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      currentIndex: currentIndex,
+      onTap: onTap,
+
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      selectedItemColor: textColor,
-      unselectedItemColor: textColor,
+      backgroundColor: AppColors.whiteBody,
+      selectedItemColor: AppColors.accent,
+      unselectedItemColor: AppColors.text,
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home_rounded, size: 20),
+          icon: Icon(Icons.home_outlined, size: 20),
           label: 'Головна',
         ),
         BottomNavigationBarItem(
@@ -33,8 +39,6 @@ class BottomNav extends StatelessWidget {
           label: 'Профіль',
         ),
       ],
-      currentIndex: 0,
-      onTap: (index) {},
     );
   }
 }
