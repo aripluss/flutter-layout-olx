@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
 
 class DrawerCustom extends StatelessWidget {
   const DrawerCustom({super.key});
@@ -7,11 +7,11 @@ class DrawerCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: bodyColor,
+      backgroundColor: AppColors.body,
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(color: textColor),
+            decoration: BoxDecoration(color: AppColors.text),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
               child: Icon(Icons.person, size: 48, color: Colors.grey.shade400),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
-import 'package:flutter_layout_olx/design/dimensions.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class HeaderSearchBar extends StatelessWidget {
   const HeaderSearchBar({super.key});
@@ -12,18 +12,18 @@ class HeaderSearchBar extends StatelessWidget {
       child: TextField(
         decoration: InputDecoration(
           filled: true,
-          fillColor: whiteBodyColor,
+          fillColor: AppColors.whiteBody,
           hintText: 'Що шукаєте?',
           hintStyle: const TextStyle(
-            color: placeholderColor,
-            fontSize: fontSize14,
+            color: AppColors.placeholder,
+            fontSize: AppDimensions.font14,
           ),
           suffixIcon: SuffixIcon(),
           border: OutlineInputBorder(
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(4),
           ),
-          contentPadding: const EdgeInsets.all(padding16),
+          contentPadding: const EdgeInsets.all(AppDimensions.padding16),
         ),
       ),
     );
@@ -37,7 +37,7 @@ class SuffixIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: textColor,
+        color: AppColors.text,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(4),
           bottomRight: Radius.circular(4),

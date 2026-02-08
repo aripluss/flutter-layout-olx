@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
-import 'package:flutter_layout_olx/design/dimensions.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:flutter_layout_olx/pages/product/product_page.dart';
 
 class RecommendedSection extends StatelessWidget {
@@ -12,9 +12,9 @@ class RecommendedSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(
         top: 24,
-        right: padding16,
-        bottom: padding16,
-        left: padding16,
+        right: AppDimensions.padding16,
+        bottom: AppDimensions.padding16,
+        left: AppDimensions.padding16,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,8 +22,8 @@ class RecommendedSection extends StatelessWidget {
           const Text(
             'Рекомендоване вам',
             style: TextStyle(
-              color: textColor,
-              fontSize: fontSize20,
+              color: AppColors.text,
+              fontSize: AppDimensions.font20,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -78,7 +78,7 @@ class RecommendedCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: whiteBodyColor,
+          color: AppColors.whiteBody,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
@@ -93,7 +93,7 @@ class RecommendedCard extends StatelessWidget {
               tag: 'product-image-$index',
               child: Container(
                 decoration: BoxDecoration(
-                  color: textColor,
+                  color: AppColors.text,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
@@ -105,7 +105,7 @@ class RecommendedCard extends StatelessWidget {
 
             // info
             Padding(
-              padding: const EdgeInsets.all(padding16),
+              padding: const EdgeInsets.all(AppDimensions.padding16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -122,9 +122,9 @@ class RecommendedCard extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
-                              fontSize: fontSize14,
+                              fontSize: AppDimensions.font14,
                               height: 1.2,
-                              color: textColor,
+                              color: AppColors.text,
                             ),
                           ),
                         ),
@@ -137,14 +137,22 @@ class RecommendedCard extends StatelessWidget {
                         //   iconSize: 18,
                         //   icon: const Icon(
                         //     Icons.favorite_border,
-                        //     color: textColor,
+                        //     color: AppColors.text,
                         //   ),
                         // ),
-                        GestureDetector(
+                        // GestureDetector(
+                        //   onTap: () {},
+                        //   child: Icon(
+                        //     Icons.favorite_border,
+                        //     color: AppColors.text,
+                        //     size: 18,
+                        //   ),
+                        // ),
+                        InkWell(
                           onTap: () {},
                           child: Icon(
                             Icons.favorite_border,
-                            color: textColor,
+                            color: AppColors.text,
                             size: 18,
                           ),
                         ),
@@ -158,9 +166,9 @@ class RecommendedCard extends StatelessWidget {
                   Text(
                     '${(index + 1) * Random().nextInt(300)} грн.',
                     style: const TextStyle(
-                      color: textColor,
+                      color: AppColors.text,
                       fontWeight: FontWeight.bold,
-                      fontSize: fontSize16,
+                      fontSize: AppDimensions.font16,
                     ),
                   ),
 
@@ -170,8 +178,8 @@ class RecommendedCard extends StatelessWidget {
                   Text(
                     'Місто',
                     style: const TextStyle(
-                      color: textColor,
-                      fontSize: fontSize14,
+                      color: AppColors.text,
+                      fontSize: AppDimensions.font14,
                       height: 1.2,
                     ),
                   ),
@@ -179,8 +187,8 @@ class RecommendedCard extends StatelessWidget {
                   Text(
                     'Сьогодні о 12:00',
                     style: const TextStyle(
-                      color: textColor,
-                      fontSize: fontSize14,
+                      color: AppColors.text,
+                      fontSize: AppDimensions.font14,
                       height: 1.2,
                     ),
                   ),

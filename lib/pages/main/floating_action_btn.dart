@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
 
 class FloatingActionBtn extends StatelessWidget {
   final bool isShown;
@@ -19,8 +19,8 @@ class FloatingActionBtn extends StatelessWidget {
       offset: isShown ? Offset.zero : const Offset(0, 3),
       child: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: whiteBodyColor,
-        foregroundColor: textColor,
+        backgroundColor: AppColors.whiteBody,
+        foregroundColor: AppColors.text,
         child: const Icon(Icons.arrow_upward),
         onPressed: () {
           controller.animateTo(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
-import 'package:flutter_layout_olx/design/dimensions.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:flutter_layout_olx/pages/chat/chat_page.dart';
 import 'package:flutter_layout_olx/pages/createAd/create_ad_page.dart';
 import 'package:flutter_layout_olx/pages/favorites/favorites_page.dart';
@@ -48,7 +48,6 @@ class _MainPageState extends State<MainPage> {
   void _onNavTap(int index) {
     setState(() => _currentIndex = index);
 
-    // _pageController.jumpToPage(index); // різко
     _pageController.animateToPage(
       index,
       duration: const Duration(milliseconds: 250),
@@ -67,16 +66,16 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: bodyColor,
+        backgroundColor: AppColors.body,
         elevation: 0,
         toolbarHeight: 80,
         title: const HeaderSearchBar(),
-        actionsPadding: EdgeInsets.only(right: padding16),
+        actionsPadding: EdgeInsets.only(right: AppDimensions.padding16),
         actions: [
           IconButton(
             icon: const Icon(
               Icons.notifications_none,
-              color: textColor,
+              color: AppColors.text,
               size: 28,
             ),
             onPressed: () {},

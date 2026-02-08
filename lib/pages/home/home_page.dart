@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/pages/home/categories_grid.dart';
 import 'package:flutter_layout_olx/pages/home/change_language.dart';
 import 'package:flutter_layout_olx/pages/home/recommended.dart';
@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: bodyColor,
+      color: AppColors.body,
       child: SafeArea(
         child: SingleChildScrollView(
           controller: scrollController,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
-import 'package:flutter_layout_olx/design/dimensions.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ProductPage extends StatelessWidget {
   final String heroTag;
@@ -18,27 +18,27 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: bodyColor,
+        backgroundColor: AppColors.body,
         elevation: 0,
         toolbarHeight: 80,
         title: Text(
           title,
           style: const TextStyle(
-            fontSize: fontSize20,
+            fontSize: AppDimensions.font20,
             fontWeight: FontWeight.w500,
-            color: textColor,
+            color: AppColors.text,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: textColor),
+          icon: const Icon(Icons.arrow_back, color: AppColors.text),
           onPressed: () => Navigator.pop(context),
         ),
         surfaceTintColor: Colors.transparent,
       ),
 
       body: Container(
-        color: bodyColor,
-        padding: const EdgeInsets.all(padding16),
+        color: AppColors.body,
+        padding: const EdgeInsets.all(AppDimensions.padding16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,7 +49,7 @@ class ProductPage extends StatelessWidget {
                 aspectRatio: 1,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: textColor,
+                    color: AppColors.text,
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
@@ -62,9 +62,9 @@ class ProductPage extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                fontSize: fontSize20,
+                fontSize: AppDimensions.font20,
                 fontWeight: FontWeight.w500,
-                color: textColor,
+                color: AppColors.text,
                 height: 1.3,
               ),
             ),
@@ -75,9 +75,9 @@ class ProductPage extends StatelessWidget {
             Text(
               price,
               style: const TextStyle(
-                fontSize: fontSize20,
+                fontSize: AppDimensions.font20,
                 fontWeight: FontWeight.bold,
-                color: textColor,
+                color: AppColors.text,
               ),
             ),
           ],

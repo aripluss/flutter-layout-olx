@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
-import 'package:flutter_layout_olx/design/dimensions.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
@@ -9,18 +9,18 @@ class CategoriesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: padding16,
-        vertical: padding16,
+        horizontal: AppDimensions.padding16,
+        vertical: AppDimensions.padding16,
       ),
-      color: whiteBodyColor,
+      color: AppColors.whiteBody,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Ознайомтеся з категоріями OLX',
             style: TextStyle(
-              color: textColor,
-              fontSize: fontSize20,
+              color: AppColors.text,
+              fontSize: AppDimensions.font20,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -38,7 +38,6 @@ class CategoriesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      // padding: EdgeInsets.zero, // не працює, не прибирає паддінги
       primary: false,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -51,6 +50,7 @@ class CategoriesGrid extends StatelessWidget {
       itemBuilder: (context, index) {
         return Column(
           mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               width: 48,
@@ -58,15 +58,19 @@ class CategoriesGrid extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape
                     .circle, // same as borderRadius: BorderRadius.circular(100),
-                color: accentColor,
+                color: AppColors.accent,
               ),
               alignment: Alignment.center,
               child: Text("SVG", style: const TextStyle(color: Colors.white)),
             ),
             const SizedBox(height: 8),
             Text(
-              'Категорія ${index + 1}',
-              style: const TextStyle(color: textColor, fontSize: fontSize12),
+              'Категорія товарів №${index + 1}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: AppColors.text,
+                fontSize: AppDimensions.font12,
+              ),
             ),
           ],
         );

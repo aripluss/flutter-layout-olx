@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
@@ -7,13 +8,16 @@ class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: bodyColor,
+      color: AppColors.body,
       child: const SafeArea(
         child: Center(
           child: Text(
             'Тут будуть товари,\nякі вам сподобались',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 18, color: Colors.black54),
+            style: TextStyle(
+              fontSize: AppDimensions.font18,
+              color: Colors.black54,
+            ),
           ),
         ),
       ),

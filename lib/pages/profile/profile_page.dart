@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/design/colors.dart';
+import 'package:flutter_layout_olx/theme/colors.dart';
+import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -7,13 +8,13 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: bodyColor,
+      color: AppColors.body,
       child: SafeArea(
         child: Column(
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-              color: textColor,
+              color: AppColors.text,
               child: Row(
                 children: [
                   CircleAvatar(
@@ -33,14 +34,17 @@ class ProfilePage extends StatelessWidget {
                         "Iryna Klosheva",
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 18,
+                          fontSize: AppDimensions.font18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(height: 4),
                       Text(
                         "aripluss@i.ua",
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: AppDimensions.font14,
+                        ),
                       ),
                     ],
                   ),
