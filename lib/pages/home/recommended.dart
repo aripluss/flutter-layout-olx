@@ -1,11 +1,19 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_olx/data/products_data.dart';
+import 'package:flutter_layout_olx/pages/home/products_grid.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
-import 'package:flutter_layout_olx/pages/product/product_page.dart';
 
 class RecommendedSection extends StatelessWidget {
-  const RecommendedSection({super.key});
+  final VoidCallback onFavoritesChanged;
+
+  final List<Product> products;
+
+  const RecommendedSection({
+    super.key,
+    required this.products,
+    required this.onFavoritesChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,175 +36,11 @@ class RecommendedSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          RecommendedGrid(),
+          ProductsGrid(
+            products: products,
+            onFavoritesChanged: onFavoritesChanged,
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class RecommendedGrid extends StatelessWidget {
-  const RecommendedGrid({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics:
-          const NeverScrollableScrollPhysics(), // скролиться вся сторінка, а не грід окремо
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        childAspectRatio: 0.64,
-      ),
-      itemCount: 14,
-      itemBuilder: (context, index) {
-        return RecommendedCard(index: index);
-      },
-    );
-  }
-}
-
-class RecommendedCard extends StatelessWidget {
-  final int index;
-  const RecommendedCard({super.key, required this.index});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (_) => ProductPage(
-              heroTag: 'product-image-$index',
-              title: 'Заголовок об\'яви номер ${index + 1}',
-              price: '${(index + 1) * Random().nextInt(300)} грн.',
-            ),
-          ),
-        );
-      },
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColors.whiteBody,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(8),
-            topRight: Radius.circular(8),
-          ),
-        ),
-
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // image
-            Hero(
-              tag: 'product-image-$index',
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.text,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8),
-                    topRight: Radius.circular(8),
-                  ),
-                ),
-                child: AspectRatio(aspectRatio: 168 / 126),
-              ),
-            ),
-
-            // info
-            Padding(
-              padding: const EdgeInsets.all(AppDimensions.padding16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // title
-                        Expanded(
-                          child: Text(
-                            'Заголовок об\'яви номер ${index + 1}',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: AppDimensions.font14,
-                              height: 1.2,
-                              color: AppColors.text,
-                            ),
-                          ),
-                        ),
-
-                        SizedBox(width: 16),
-
-                        // favorite button
-                        // IconButton(
-                        //   onPressed: () {},
-                        //   iconSize: 18,
-                        //   icon: const Icon(
-                        //     Icons.favorite_border,
-                        //     color: AppColors.text,
-                        //   ),
-                        // ),
-                        // GestureDetector(
-                        //   onTap: () {},
-                        //   child: Icon(
-                        //     Icons.favorite_border,
-                        //     color: AppColors.text,
-                        //     size: 18,
-                        //   ),
-                        // ),
-                        InkWell(
-                          onTap: () {},
-                          child: Icon(
-                            Icons.favorite_border,
-                            color: AppColors.text,
-                            size: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // price
-                  Text(
-                    '${(index + 1) * Random().nextInt(300)} грн.',
-                    style: const TextStyle(
-                      color: AppColors.text,
-                      fontWeight: FontWeight.bold,
-                      fontSize: AppDimensions.font16,
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  // location
-                  Text(
-                    'Місто',
-                    style: const TextStyle(
-                      color: AppColors.text,
-                      fontSize: AppDimensions.font14,
-                      height: 1.2,
-                    ),
-                  ),
-                  // time
-                  Text(
-                    'Сьогодні о 12:00',
-                    style: const TextStyle(
-                      color: AppColors.text,
-                      fontSize: AppDimensions.font14,
-                      height: 1.2,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

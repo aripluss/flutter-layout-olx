@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_olx/data/products_data.dart';
+import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   final String heroTag;
-  final String title;
-  final String price;
+  final Product product;
 
-  const ProductPage({
-    super.key,
-    required this.title,
-    required this.price,
-    required this.heroTag,
-  });
+  const ProductPage({super.key, required this.product, required this.heroTag});
 
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,19 +22,26 @@ class ProductPage extends StatelessWidget {
         backgroundColor: AppColors.body,
         elevation: 0,
         toolbarHeight: 80,
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontSize: AppDimensions.font20,
-            fontWeight: FontWeight.w500,
-            color: AppColors.text,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: AppDimensions.padding16),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back, color: AppColors.text),
+            onPressed: () => Navigator.pop(context),
           ),
         ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.text),
-          onPressed: () => Navigator.pop(context),
-        ),
         surfaceTintColor: Colors.transparent,
+
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: AppDimensions.padding16),
+            child: FavoriteButton(
+              product: widget.product,
+              onChanged: () {
+                setState(() {});
+              },
+            ),
+          ),
+        ],
       ),
 
       body: Container(
@@ -44,7 +52,7 @@ class ProductPage extends StatelessWidget {
           children: [
             // photo
             Hero(
-              tag: heroTag,
+              tag: widget.heroTag,
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Container(
@@ -58,26 +66,127 @@ class ProductPage extends StatelessWidget {
 
             const SizedBox(height: 16),
 
+            // city & time
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Text(
+                  widget.product.city,
+                  style: const TextStyle(
+                    fontSize: AppDimensions.font12,
+                    color: AppColors.placeholder,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Text(
+                  'Опубліковано ${widget.product.time}',
+                  style: const TextStyle(
+                    fontSize: AppDimensions.font12,
+                    color: AppColors.placeholder,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8),
+
             // title
             Text(
-              title,
+              widget.product.title,
               style: const TextStyle(
-                fontSize: AppDimensions.font20,
-                fontWeight: FontWeight.w500,
+                fontSize: AppDimensions.font16,
+                fontWeight: FontWeight.w400,
                 color: AppColors.text,
-                height: 1.3,
               ),
             ),
 
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
 
             // price
             Text(
-              price,
+              '${widget.product.price} грн',
               style: const TextStyle(
                 fontSize: AppDimensions.font20,
                 fontWeight: FontWeight.bold,
                 color: AppColors.text,
+              ),
+            ),
+
+            const SizedBox(height: 32),
+
+            // description
+            const Text(
+              'ОПИС',
+              style: TextStyle(
+                color: AppColors.text,
+                fontSize: AppDimensions.font14,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              widget.product.description,
+              style: const TextStyle(
+                fontSize: AppDimensions.font14,
+                color: AppColors.text,
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            // order btn
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.text,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                icon: const Icon(
+                  Icons.local_shipping_outlined,
+                  color: Colors.white,
+                ),
+                label: const Text(
+                  'Купити з доставкою',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: AppDimensions.font16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            const Spacer(),
+
+            // chat btn
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.whiteBody,
+                  foregroundColor: AppColors.text,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: const BorderSide(color: AppColors.text),
+                  ),
+                ),
+                child: const Text(
+                  'Повідомлення',
+                  style: TextStyle(
+                    color: AppColors.text,
+                    fontSize: AppDimensions.font16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
               ),
             ),
           ],
