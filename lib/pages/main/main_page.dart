@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:flutter_layout_olx/pages/chat/chat_page.dart';
@@ -19,6 +20,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  late final List<Product> products;
+
   // Page switching
   final PageController _pageController = PageController();
   int _currentIndex = 0;
@@ -26,11 +29,13 @@ class _MainPageState extends State<MainPage> {
   final ScrollController _scrollController = ScrollController();
   bool _showFab = false;
 
-  // FAB logic
   @override
   void initState() {
     super.initState();
+    // Load products
+    products = generateProductsMock();
 
+    // FAB logic
     WidgetsBinding.instance.addPostFrameCallback((_) {
       double screenHeight = MediaQuery.of(context).size.height;
 
@@ -78,7 +83,9 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: AppColors.body,
         elevation: 0,
         toolbarHeight: 80,
+        titleSpacing: AppDimensions.padding16,
         title: const HeaderSearchBar(),
+
         actionsPadding: EdgeInsets.only(right: AppDimensions.padding16),
         actions: [
           IconButton(
@@ -103,12 +110,18 @@ class _MainPageState extends State<MainPage> {
 
       endDrawer: DrawerCustom(),
 
-      // PageView замість Column + SingleChildScrollView
+      // PageView replaces Column + SingleChildScrollView
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: [
-          HomePage(scrollController: _scrollController),
+          HomePage(
+            scrollController: _scrollController,
+            products: products,
+            onFavoritesChanged: () {
+              setState(() {});
+            },
+          ),
           FavoritesPage(),
           CreateAdPage(),
           ChatPage(),
