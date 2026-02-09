@@ -3,7 +3,7 @@ import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/home/product_card.dart';
 
 class ProductsGrid extends StatelessWidget {
-  final VoidCallback onFavoritesChanged;
+  final VoidCallback? onFavoritesChanged;
 
   final List<Product> products;
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/data/favorites_data.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
@@ -102,7 +101,7 @@ class _MainPageState extends State<MainPage> {
 
       endDrawer: DrawerCustom(),
 
-      // PageView замість Column + SingleChildScrollView
+      // PageView replaces Column + SingleChildScrollView
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
@@ -114,12 +113,7 @@ class _MainPageState extends State<MainPage> {
               setState(() {});
             },
           ),
-          FavoritesPage(
-            favorites: favoritesList,
-            onFavoritesChanged: () {
-              setState(() {});
-            },
-          ),
+          FavoritesPage(),
           CreateAdPage(),
           ChatPage(),
           ProfilePage(),

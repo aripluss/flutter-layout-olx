@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/data/favorites_data.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/product/product_page.dart';
 import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
@@ -101,9 +100,7 @@ class _ProductCardState extends State<ProductCard> {
                         FavoriteButton(
                           size: 16,
                           product: widget.product,
-                          onChanged: () {
-                            setState(() {});
-                          },
+                          onChanged: widget.onUpdate,
                         ),
                       ],
                     ),
