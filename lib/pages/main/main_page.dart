@@ -46,6 +46,8 @@ class _MainPageState extends State<MainPage> {
 
   // BottomNav logic
   void _onNavTap(int index) {
+    if (_currentIndex == index) return;
+
     setState(() => _currentIndex = index);
 
     _pageController.animateToPage(
@@ -60,6 +62,13 @@ class _MainPageState extends State<MainPage> {
     if (_currentIndex != index) {
       setState(() => _currentIndex = index);
     }
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
