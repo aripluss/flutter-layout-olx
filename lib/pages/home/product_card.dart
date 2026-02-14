@@ -5,41 +5,24 @@ import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
-class ProductCard extends StatefulWidget {
+class ProductCard extends StatelessWidget {
   final int index;
   final Product product;
-  final VoidCallback? onUpdate;
 
-  const ProductCard({
-    super.key,
-    required this.index,
-    required this.product,
-    this.onUpdate,
-  });
+  const ProductCard({super.key, required this.index, required this.product});
 
-  @override
-  State<ProductCard> createState() => _ProductCardState();
-}
-
-class _ProductCardState extends State<ProductCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .push(
-              MaterialPageRoute(
-                builder: (_) => ProductPage(
-                  heroTag: 'product-image-${widget.product.id}',
-                  product: widget.product,
-                ),
-              ),
-            )
-            .then((_) {
-              // чи додали в "улюблені" на сторінці товару?
-              widget.onUpdate?.call();
-              setState(() {});
-            });
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => ProductPage(
+              heroTag: 'product-image-${product.id}',
+              product: product,
+            ),
+          ),
+        );
       },
       child: Container(
         decoration: BoxDecoration(
@@ -55,7 +38,7 @@ class _ProductCardState extends State<ProductCard> {
           children: [
             // image
             Hero(
-              tag: 'product-image-${widget.product.id}',
+              tag: 'product-image-${product.id}',
               child: Container(
                 decoration: BoxDecoration(
                   color: AppColors.text,
@@ -83,7 +66,7 @@ class _ProductCardState extends State<ProductCard> {
                         // title
                         Expanded(
                           child: Text(
-                            widget.product.title,
+                            product.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -99,8 +82,8 @@ class _ProductCardState extends State<ProductCard> {
                         // favorite button
                         FavoriteButton(
                           size: 16,
-                          product: widget.product,
-                          onChanged: widget.onUpdate,
+                          product: product,
+                          // onChanged: widget.onUpdate,
                         ),
                       ],
                     ),
@@ -110,7 +93,7 @@ class _ProductCardState extends State<ProductCard> {
 
                   // price
                   Text(
-                    '${widget.product.price} грн',
+                    '${product.price} грн',
                     style: const TextStyle(
                       color: AppColors.text,
                       fontWeight: FontWeight.bold,
@@ -122,7 +105,7 @@ class _ProductCardState extends State<ProductCard> {
 
                   // location
                   Text(
-                    widget.product.city,
+                    product.city,
                     style: const TextStyle(
                       color: AppColors.text,
                       fontSize: AppDimensions.font14,
@@ -131,7 +114,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   // time
                   Text(
-                    widget.product.time,
+                    product.time,
                     style: const TextStyle(
                       color: AppColors.text,
                       fontSize: AppDimensions.font14,

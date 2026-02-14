@@ -110,18 +110,11 @@ class _MainPageState extends State<MainPage> {
 
       endDrawer: DrawerCustom(),
 
-      // PageView replaces Column + SingleChildScrollView
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: [
-          HomePage(
-            scrollController: _scrollController,
-            products: products,
-            onFavoritesChanged: () {
-              setState(() {});
-            },
-          ),
+          HomePage(scrollController: _scrollController, products: products),
           FavoritesPage(),
           CreateAdPage(),
           ChatPage(),

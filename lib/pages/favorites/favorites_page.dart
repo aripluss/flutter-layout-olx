@@ -3,18 +3,15 @@ import 'package:flutter_layout_olx/data/favorites_data.dart';
 import 'package:flutter_layout_olx/pages/home/products_grid.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
+import 'package:provider/provider.dart';
 
-class FavoritesPage extends StatefulWidget {
+class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
 
   @override
-  State<FavoritesPage> createState() => _FavoritesPageState();
-}
-
-class _FavoritesPageState extends State<FavoritesPage> {
-  @override
   Widget build(BuildContext context) {
-    final favoriteProducts = favoritesList;
+    final favoriteProducts = Provider.of<FavoritesModel>(context);
+    final isEmpty = favoriteProducts.count == 0;
 
     return Container(
       color: AppColors.body,
@@ -27,7 +24,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
               bottom: AppDimensions.padding16,
               left: AppDimensions.padding16,
             ),
-            child: favoriteProducts.isEmpty
+            child: isEmpty
                 ? const Center(
                     child: Text(
                       'Тут будуть товари,\nякі вам сподобались',
@@ -38,12 +35,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       ),
                     ),
                   )
-                : ProductsGrid(
-                    products: favoriteProducts,
-                    onFavoritesChanged: () {
-                      setState(() {});
-                    },
-                  ),
+                : ProductsGrid(products: favoriteProducts.favorites),
           ),
         ),
       ),
