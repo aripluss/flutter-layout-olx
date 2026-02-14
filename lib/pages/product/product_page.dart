@@ -21,7 +21,9 @@ class ProductPage extends StatelessWidget {
           padding: const EdgeInsets.only(left: AppDimensions.padding16),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: AppColors.text),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(
+              context,
+            ), // true більше не треба, бо стан оновлюється через Provider
           ),
         ),
         surfaceTintColor: Colors.transparent,

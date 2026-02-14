@@ -6,17 +6,23 @@ import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:provider/provider.dart';
 
 class FavoritesPage extends StatelessWidget {
-  const FavoritesPage({super.key});
+  final ScrollController scrollController;
+
+  const FavoritesPage({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
+    // final favoriteProductsList = context.watch<FavoritesModel>().favorites; // теж працює
+    // final isEmpty = favoriteProductsList.isEmpty;
     final favoriteProducts = Provider.of<FavoritesModel>(context);
+    final favoriteProductsList = favoriteProducts.favorites;
     final isEmpty = favoriteProducts.count == 0;
 
     return Container(
       color: AppColors.body,
       child: SafeArea(
         child: SingleChildScrollView(
+          controller: scrollController,
           child: Container(
             padding: const EdgeInsets.only(
               top: 24,
@@ -35,7 +41,7 @@ class FavoritesPage extends StatelessWidget {
                       ),
                     ),
                   )
-                : ProductsGrid(products: favoriteProducts.favorites),
+                : ProductsGrid(products: favoriteProductsList),
           ),
         ),
       ),

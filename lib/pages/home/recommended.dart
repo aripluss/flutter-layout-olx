@@ -5,15 +5,9 @@ import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class RecommendedSection extends StatelessWidget {
-  // final VoidCallback onFavoritesChanged;
-
   final List<Product> products;
 
-  const RecommendedSection({
-    super.key,
-    required this.products,
-    // required this.onFavoritesChanged,
-  });
+  const RecommendedSection({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +30,7 @@ class RecommendedSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          ProductsGrid(
-            products: products,
-            // onFavoritesChanged: onFavoritesChanged,
-          ),
+          ProductsGrid(products: products),
         ],
       ),
     );

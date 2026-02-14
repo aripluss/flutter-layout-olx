@@ -7,7 +7,6 @@ import 'package:flutter_layout_olx/pages/home/recommended.dart';
 
 class HomePage extends StatelessWidget {
   final ScrollController scrollController;
-  // final VoidCallback onFavoritesChanged;
 
   final List<Product> products;
 
@@ -15,7 +14,6 @@ class HomePage extends StatelessWidget {
     super.key,
     required this.scrollController,
     required this.products,
-    // required this.onFavoritesChanged,
   });
 
   @override
@@ -29,10 +27,7 @@ class HomePage extends StatelessWidget {
             children: [
               const CategoriesSection(),
               const ChangeLanguageSection(),
-              RecommendedSection(
-                products: products,
-                // onFavoritesChanged: onFavoritesChanged,
-              ),
+              RecommendedSection(products: products),
             ],
           ),
         ),

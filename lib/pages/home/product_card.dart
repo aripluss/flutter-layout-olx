@@ -80,11 +80,7 @@ class ProductCard extends StatelessWidget {
                         SizedBox(width: 16),
 
                         // favorite button
-                        FavoriteButton(
-                          size: 16,
-                          product: product,
-                          // onChanged: widget.onUpdate,
-                        ),
+                        FavoriteButton(size: 16, product: product),
                       ],
                     ),
                   ),

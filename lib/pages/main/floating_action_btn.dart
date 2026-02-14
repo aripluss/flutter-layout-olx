@@ -3,7 +3,7 @@ import 'package:flutter_layout_olx/theme/colors.dart';
 
 class FloatingActionBtn extends StatelessWidget {
   final bool isShown;
-  final ScrollController controller;
+  final ScrollController? controller;
 
   const FloatingActionBtn({
     super.key,
@@ -13,6 +13,7 @@ class FloatingActionBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (controller == null) return const SizedBox.shrink();
     return AnimatedSlide(
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
@@ -23,7 +24,7 @@ class FloatingActionBtn extends StatelessWidget {
         foregroundColor: AppColors.text,
         child: const Icon(Icons.arrow_upward),
         onPressed: () {
-          controller.animateTo(
+          controller?.animateTo(
             0,
             duration: const Duration(milliseconds: 400),
             curve: Curves.easeOut,

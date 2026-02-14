@@ -3,15 +3,9 @@ import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/home/product_card.dart';
 
 class ProductsGrid extends StatelessWidget {
-  // final VoidCallback? onFavoritesChanged;
-
   final List<Product> products;
 
-  const ProductsGrid({
-    super.key,
-    required this.products,
-    // required this.onFavoritesChanged,
-  });
+  const ProductsGrid({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +21,7 @@ class ProductsGrid extends StatelessWidget {
       itemCount: products.length,
       itemBuilder: (context, index) {
         final product = products[index];
-        return ProductCard(
-          product: product,
-          index: index,
-          // onUpdate: onFavoritesChanged,
-        );
+        return ProductCard(product: product, index: index);
       },
     );
   }

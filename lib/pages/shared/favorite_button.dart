@@ -11,7 +11,8 @@ class FavoriteButton extends StatelessWidget {
   const FavoriteButton({super.key, required this.product, this.size = 28});
 
   void _toggle(BuildContext context) {
-    context.read<FavoritesModel>().toggle(product);
+    // context.read<FavoritesModel>().toggle(product); // теж працює
+    Provider.of<FavoritesModel>(context, listen: false).toggle(product);
   }
 
   @override

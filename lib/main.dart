@@ -6,7 +6,7 @@ import 'package:flutter_layout_olx/pages/main/main_page.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      create: (_) => FavoritesModel(),
+      create: (context) => FavoritesModel(),
       child: const MainApp(),
     ),
   );
