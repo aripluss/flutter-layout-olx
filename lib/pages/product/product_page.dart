@@ -4,17 +4,12 @@ import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
 import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductPage extends StatelessWidget {
   final String heroTag;
   final Product product;
 
   const ProductPage({super.key, required this.product, required this.heroTag});
 
-  @override
-  State<ProductPage> createState() => _ProductPageState();
-}
-
-class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +21,9 @@ class _ProductPageState extends State<ProductPage> {
           padding: const EdgeInsets.only(left: AppDimensions.padding16),
           child: IconButton(
             icon: const Icon(Icons.arrow_back, color: AppColors.text),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pop(
+              context,
+            ), // true більше не треба, бо стан оновлюється через Provider
           ),
         ),
         surfaceTintColor: Colors.transparent,
@@ -34,12 +31,7 @@ class _ProductPageState extends State<ProductPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: AppDimensions.padding16),
-            child: FavoriteButton(
-              product: widget.product,
-              onChanged: () {
-                setState(() {});
-              },
-            ),
+            child: FavoriteButton(product: product),
           ),
         ],
       ),
@@ -52,7 +44,7 @@ class _ProductPageState extends State<ProductPage> {
           children: [
             // photo
             Hero(
-              tag: widget.heroTag,
+              tag: heroTag,
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Container(
@@ -71,7 +63,7 @@ class _ProductPageState extends State<ProductPage> {
             Row(
               children: [
                 Text(
-                  widget.product.city,
+                  product.city,
                   style: const TextStyle(
                     fontSize: AppDimensions.font12,
                     color: AppColors.placeholder,
@@ -79,7 +71,7 @@ class _ProductPageState extends State<ProductPage> {
                 ),
                 const SizedBox(width: 16),
                 Text(
-                  'Опубліковано ${widget.product.time}',
+                  'Опубліковано ${product.time}',
                   style: const TextStyle(
                     fontSize: AppDimensions.font12,
                     color: AppColors.placeholder,
@@ -92,7 +84,7 @@ class _ProductPageState extends State<ProductPage> {
 
             // title
             Text(
-              widget.product.title,
+              product.title,
               style: const TextStyle(
                 fontSize: AppDimensions.font16,
                 fontWeight: FontWeight.w400,
@@ -104,7 +96,7 @@ class _ProductPageState extends State<ProductPage> {
 
             // price
             Text(
-              '${widget.product.price} грн',
+              '${product.price} грн',
               style: const TextStyle(
                 fontSize: AppDimensions.font20,
                 fontWeight: FontWeight.bold,
@@ -125,7 +117,7 @@ class _ProductPageState extends State<ProductPage> {
             ),
             const SizedBox(height: 8),
             Text(
-              widget.product.description,
+              product.description,
               style: const TextStyle(
                 fontSize: AppDimensions.font14,
                 color: AppColors.text,

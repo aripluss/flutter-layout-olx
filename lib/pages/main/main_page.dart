@@ -26,23 +26,33 @@ class _MainPageState extends State<MainPage> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   // FAB
-  final ScrollController _scrollController = ScrollController();
+  final ScrollController _homeScrollController = ScrollController();
+  final ScrollController _favoritesScrollController = ScrollController();
   bool _showFab = false;
 
   @override
   void initState() {
     super.initState();
-    // Load products
+    // Load products & favorite products
     products = generateProductsMock();
 
     // FAB logic
     WidgetsBinding.instance.addPostFrameCallback((_) {
       double screenHeight = MediaQuery.of(context).size.height;
 
-      _scrollController.addListener(() {
-        if (_scrollController.offset > screenHeight && !_showFab) {
+      _homeScrollController.addListener(() {
+        if (_homeScrollController.offset > screenHeight && !_showFab) {
           setState(() => _showFab = true);
-        } else if (_scrollController.offset <= screenHeight && _showFab) {
+        } else if (_homeScrollController.offset <= screenHeight && _showFab) {
+          setState(() => _showFab = false);
+        }
+      });
+
+      _favoritesScrollController.addListener(() {
+        if (_favoritesScrollController.offset > screenHeight && !_showFab) {
+          setState(() => _showFab = true);
+        } else if (_favoritesScrollController.offset <= screenHeight &&
+            _showFab) {
           setState(() => _showFab = false);
         }
       });
@@ -53,7 +63,10 @@ class _MainPageState extends State<MainPage> {
   void _onNavTap(int index) {
     if (_currentIndex == index) return;
 
-    setState(() => _currentIndex = index);
+    setState(() {
+      _currentIndex = index;
+      _showFab = false;
+    });
 
     _pageController.animateToPage(
       index,
@@ -65,14 +78,18 @@ class _MainPageState extends State<MainPage> {
   // Swipe logic
   void _onPageChanged(int index) {
     if (_currentIndex != index) {
-      setState(() => _currentIndex = index);
+      setState(() {
+        _currentIndex = index;
+        _showFab = false;
+      });
     }
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    _scrollController.dispose();
+    _homeScrollController.dispose();
+    _favoritesScrollController.dispose();
     super.dispose();
   }
 
@@ -110,19 +127,12 @@ class _MainPageState extends State<MainPage> {
 
       endDrawer: DrawerCustom(),
 
-      // PageView replaces Column + SingleChildScrollView
       body: PageView(
         controller: _pageController,
         onPageChanged: _onPageChanged,
         children: [
-          HomePage(
-            scrollController: _scrollController,
-            products: products,
-            onFavoritesChanged: () {
-              setState(() {});
-            },
-          ),
-          FavoritesPage(),
+          HomePage(scrollController: _homeScrollController, products: products),
+          FavoritesPage(scrollController: _favoritesScrollController),
           CreateAdPage(),
           ChatPage(),
           ProfilePage(),
@@ -131,7 +141,11 @@ class _MainPageState extends State<MainPage> {
 
       floatingActionButton: FloatingActionBtn(
         isShown: _showFab,
-        controller: _scrollController,
+        controller: _currentIndex == 0
+            ? _homeScrollController
+            : _currentIndex == 1
+            ? _favoritesScrollController
+            : null, // null для інших сторінок
       ),
 
       bottomNavigationBar: BottomNav(
