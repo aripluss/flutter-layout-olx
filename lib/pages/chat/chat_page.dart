@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ChatPage extends StatelessWidget {
@@ -8,8 +7,8 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.body,
-      child: const SafeArea(
+      color: Theme.of(context).colorScheme.surface,
+      child: SafeArea(
         child: Center(
           child: Text(
             'У вас ще немає чатів.\n'
@@ -17,7 +16,7 @@ class ChatPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: AppDimensions.font18,
-              color: Colors.black54,
+              color: Theme.of(context).textTheme.bodyMedium?.color,
             ),
           ),
         ),

@@ -11,6 +11,8 @@ import 'package:flutter_layout_olx/pages/main/drawer_custom.dart';
 import 'package:flutter_layout_olx/pages/main/floating_action_btn.dart';
 import 'package:flutter_layout_olx/pages/main/header_search_bar.dart';
 import 'package:flutter_layout_olx/pages/profile/profile_page.dart';
+import 'package:flutter_layout_olx/theme/theme-notifier.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -95,24 +97,19 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = context.watch<ThemeNotifier>().isDarkTheme;
+    void toggleTheme(value) => context.read<ThemeNotifier>().darkTheme = value;
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.body,
-        elevation: 0,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         toolbarHeight: 80,
         titleSpacing: AppDimensions.padding16,
         title: const HeaderSearchBar(),
 
         actionsPadding: EdgeInsets.only(right: AppDimensions.padding16),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.notifications_none,
-              color: AppColors.text,
-              size: 28,
-            ),
-            onPressed: () {},
-          ),
+          Switch(value: isDarkTheme, onChanged: toggleTheme),
           Builder(
             builder: (context) => IconButton(
               icon: const Icon(Icons.menu),

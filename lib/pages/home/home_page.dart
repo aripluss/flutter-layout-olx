@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.body,
+      color: Theme.of(context).colorScheme.surface,
       child: SafeArea(
         child: SingleChildScrollView(
           controller: scrollController,

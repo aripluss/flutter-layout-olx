@@ -14,9 +14,9 @@ class HeaderSearchBar extends StatelessWidget {
           filled: true,
           fillColor: AppColors.whiteBody,
           hintText: 'Що шукаєте?',
-          hintStyle: const TextStyle(
-            color: AppColors.placeholder,
-            fontSize: AppDimensions.font14,
+          hintStyle: TextStyle(
+            color: Theme.of(context).hintColor,
+            fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
           ),
           suffixIcon: SuffixIcon(),
           border: OutlineInputBorder(

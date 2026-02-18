@@ -37,7 +37,7 @@ class ProductPage extends StatelessWidget {
       ),
 
       body: Container(
-        color: AppColors.body,
+        color: Theme.of(context).colorScheme.surface,
         padding: const EdgeInsets.all(AppDimensions.padding16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,17 +64,17 @@ class ProductPage extends StatelessWidget {
               children: [
                 Text(
                   product.city,
-                  style: const TextStyle(
-                    fontSize: AppDimensions.font12,
-                    color: AppColors.placeholder,
+                  style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Text(
                   'Опубліковано ${product.time}',
-                  style: const TextStyle(
-                    fontSize: AppDimensions.font12,
-                    color: AppColors.placeholder,
+                  style: TextStyle(
+                    fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
+                    color: Theme.of(context).hintColor,
                   ),
                 ),
               ],

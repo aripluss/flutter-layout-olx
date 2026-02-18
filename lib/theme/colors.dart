@@ -1,7 +1,11 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
 
 class AppColors {
-  AppColors._(); // приватний конструктор, щоб не створювати екземпляр класу
+  final bool isDarkTheme;
+
+  AppColors._(
+    this.isDarkTheme,
+  ); // приватний конструктор, щоб не створювати екземпляр класу
 
   static const Color whiteBody = Color(0xFFFFFFFF);
   static const Color body = Color(0xFFF2F4F5);

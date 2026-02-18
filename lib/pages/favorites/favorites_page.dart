@@ -19,7 +19,7 @@ class FavoritesPage extends StatelessWidget {
     final isEmpty = favoriteProducts.count == 0;
 
     return Container(
-      color: AppColors.body,
+      color: Theme.of(context).colorScheme.surface,
       child: SafeArea(
         child: SingleChildScrollView(
           controller: scrollController,

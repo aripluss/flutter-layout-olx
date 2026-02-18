@@ -67,10 +67,7 @@ class CategoriesGrid extends StatelessWidget {
             Text(
               'Категорія товарів №${index + 1}',
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: AppColors.text,
-                fontSize: AppDimensions.font12,
-              ),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
           ],
         );
