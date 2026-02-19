@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class CategoriesSection extends StatelessWidget {
@@ -12,19 +11,17 @@ class CategoriesSection extends StatelessWidget {
         horizontal: AppDimensions.padding16,
         vertical: AppDimensions.padding16,
       ),
-      color: AppColors.whiteBody,
+      color: Theme.of(context).colorScheme.surfaceContainer,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Ознайомтеся з категоріями OLX',
-            style: TextStyle(
-              color: AppColors.text,
-              fontSize: AppDimensions.font20,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
+
           const SizedBox(height: 12),
+
           CategoriesGrid(),
         ],
       ),
@@ -58,16 +55,18 @@ class CategoriesGrid extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape
                     .circle, // same as borderRadius: BorderRadius.circular(100),
-                color: AppColors.accent,
+                color: Theme.of(context).highlightColor,
               ),
               alignment: Alignment.center,
               child: Text("SVG", style: const TextStyle(color: Colors.white)),
             ),
+
             const SizedBox(height: 8),
+
             Text(
               'Категорія товарів №${index + 1}',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleLarge,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         );

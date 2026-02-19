@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
-import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class CreateAdPage extends StatelessWidget {
   const CreateAdPage({super.key});
@@ -9,15 +7,12 @@ class CreateAdPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).colorScheme.surface,
-      child: const SafeArea(
+      child: SafeArea(
         child: Center(
           child: Text(
             'Тут ви зможете\nстворити нове оголошення',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppDimensions.font18,
-              color: Colors.black54,
-            ),
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
       ),

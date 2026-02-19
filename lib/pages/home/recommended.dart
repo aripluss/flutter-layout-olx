@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/home/products_grid.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class RecommendedSection extends StatelessWidget {
@@ -21,13 +20,9 @@ class RecommendedSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             'Рекомендоване вам',
-            style: TextStyle(
-              color: AppColors.text,
-              fontSize: AppDimensions.font20,
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           const SizedBox(height: 24),
           ProductsGrid(products: products),

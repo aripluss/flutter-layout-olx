@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class HeaderSearchBar extends StatelessWidget {
@@ -11,8 +10,9 @@ class HeaderSearchBar extends StatelessWidget {
       height: 48,
       child: TextField(
         decoration: InputDecoration(
+          hoverColor: Theme.of(context).appBarTheme.backgroundColor,
           filled: true,
-          fillColor: AppColors.whiteBody,
+          fillColor: Theme.of(context).colorScheme.surfaceContainer,
           hintText: 'Що шукаєте?',
           hintStyle: TextStyle(
             color: Theme.of(context).hintColor,
@@ -37,14 +37,17 @@ class SuffixIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.text,
+        color: Theme.of(context).colorScheme.onSurface,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(4),
           bottomRight: Radius.circular(4),
         ),
       ),
       child: IconButton(
-        icon: const Icon(Icons.search, color: Colors.white),
+        icon: Icon(
+          Icons.search,
+          color: Theme.of(context).colorScheme.surfaceContainer,
+        ),
         onPressed: () {},
       ),
     );

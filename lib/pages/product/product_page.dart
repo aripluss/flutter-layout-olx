@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ProductPage extends StatelessWidget {
@@ -14,13 +13,16 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.body,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         elevation: 0,
         toolbarHeight: 80,
         leading: Padding(
           padding: const EdgeInsets.only(left: AppDimensions.padding16),
           child: IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.text),
+            icon: Icon(
+              Icons.arrow_back,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
             onPressed: () => Navigator.pop(
               context,
             ), // true більше не треба, бо стан оновлюється через Provider
@@ -49,7 +51,7 @@ class ProductPage extends StatelessWidget {
                 aspectRatio: 1,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: AppColors.text,
+                    color: Theme.of(context).colorScheme.onSurface,
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
@@ -69,7 +71,9 @@ class ProductPage extends StatelessWidget {
                     color: Theme.of(context).hintColor,
                   ),
                 ),
+
                 const SizedBox(width: 16),
+
                 Text(
                   'Опубліковано ${product.time}',
                   style: TextStyle(
@@ -83,45 +87,35 @@ class ProductPage extends StatelessWidget {
             const SizedBox(height: 8),
 
             // title
-            Text(
-              product.title,
-              style: const TextStyle(
-                fontSize: AppDimensions.font16,
-                fontWeight: FontWeight.w400,
-                color: AppColors.text,
-              ),
-            ),
+            Text(product.title, style: Theme.of(context).textTheme.bodyLarge),
 
             const SizedBox(height: 16),
 
             // price
             Text(
               '${product.price} грн',
-              style: const TextStyle(
-                fontSize: AppDimensions.font20,
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.headlineLarge!.fontSize,
                 fontWeight: FontWeight.bold,
-                color: AppColors.text,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
 
             const SizedBox(height: 32),
 
             // description
-            const Text(
+            Text(
               'ОПИС',
               style: TextStyle(
-                color: AppColors.text,
-                fontSize: AppDimensions.font14,
+                color: Theme.of(context).colorScheme.onSurface,
+                fontSize: Theme.of(context).textTheme.headlineMedium!.fontSize,
                 fontWeight: FontWeight.w700,
               ),
             ),
             const SizedBox(height: 8),
             Text(
               product.description,
-              style: const TextStyle(
-                fontSize: AppDimensions.font14,
-                color: AppColors.text,
-              ),
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
 
             const SizedBox(height: 16),
@@ -132,21 +126,21 @@ class ProductPage extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.text,
+                  backgroundColor: Theme.of(context).colorScheme.onSurface,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
-                icon: const Icon(
+                icon: Icon(
                   Icons.local_shipping_outlined,
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
-                label: const Text(
+                label: Text(
                   'Купити з доставкою',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: AppDimensions.font16,
+                    color: Theme.of(context).colorScheme.surface,
+                    fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -163,19 +157,21 @@ class ProductPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.whiteBody,
-                  foregroundColor: AppColors.text,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
-                    side: const BorderSide(color: AppColors.text),
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Повідомлення',
                   style: TextStyle(
-                    color: AppColors.text,
-                    fontSize: AppDimensions.font16,
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

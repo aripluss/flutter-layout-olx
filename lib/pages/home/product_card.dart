@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/product/product_page.dart';
 import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ProductCard extends StatelessWidget {
@@ -26,7 +25,7 @@ class ProductCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.whiteBody,
+          color: Theme.of(context).colorScheme.surfaceContainer,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
@@ -41,7 +40,7 @@ class ProductCard extends StatelessWidget {
               tag: 'product-image-${product.id}',
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppColors.text,
+                  color: Theme.of(context).colorScheme.onSurface,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(8),
                     topRight: Radius.circular(8),
@@ -69,11 +68,9 @@ class ProductCard extends StatelessWidget {
                             product.title,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: AppDimensions.font14,
-                              height: 1.2,
-                              color: AppColors.text,
-                            ),
+                            style: Theme.of(
+                              context,
+                            ).textTheme.bodyMedium?.copyWith(height: 1.2),
                           ),
                         ),
 
@@ -90,10 +87,8 @@ class ProductCard extends StatelessWidget {
                   // price
                   Text(
                     '${product.price} грн',
-                    style: const TextStyle(
-                      color: AppColors.text,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: AppDimensions.font16,
                     ),
                   ),
 
@@ -102,20 +97,17 @@ class ProductCard extends StatelessWidget {
                   // location
                   Text(
                     product.city,
-                    style: const TextStyle(
-                      color: AppColors.text,
-                      fontSize: AppDimensions.font14,
-                      height: 1.2,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(height: 1.2),
                   ),
+
                   // time
                   Text(
                     product.time,
-                    style: const TextStyle(
-                      color: AppColors.text,
-                      fontSize: AppDimensions.font14,
-                      height: 1.2,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(height: 1.2),
                   ),
                 ],
               ),

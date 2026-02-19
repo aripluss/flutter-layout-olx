@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/favorites_data.dart';
 import 'package:flutter_layout_olx/pages/home/products_grid.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:provider/provider.dart';
 
@@ -31,14 +30,17 @@ class FavoritesPage extends StatelessWidget {
               left: AppDimensions.padding16,
             ),
             child: isEmpty
-                ? const Center(
-                    child: Text(
-                      'Тут будуть товари,\nякі вам сподобались',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: AppDimensions.font18,
-                        color: Colors.black54,
-                      ),
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height - 224,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Тут будуть товари,\nякі вам сподобались',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.titleLarge,
+                        ),
+                      ],
                     ),
                   )
                 : ProductsGrid(products: favoriteProductsList),

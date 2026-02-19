@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
@@ -14,10 +13,7 @@ class ChatPage extends StatelessWidget {
             'У вас ще немає чатів.\n'
             'Напишіть продавцю або\nзачекайте на питання по вашим товарам',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: AppDimensions.font18,
-              color: Theme.of(context).textTheme.bodyMedium?.color,
-            ),
+            style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
       ),

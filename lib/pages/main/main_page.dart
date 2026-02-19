@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:flutter_layout_olx/pages/chat/chat_page.dart';
 import 'package:flutter_layout_olx/pages/createAd/create_ad_page.dart';
