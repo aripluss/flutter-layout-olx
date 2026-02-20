@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
-import 'package:flutter_layout_olx/pages/home/products_grid.dart';
+import 'package:flutter_layout_olx/pages/shared/products_grid.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class RecommendedSection extends StatelessWidget {
