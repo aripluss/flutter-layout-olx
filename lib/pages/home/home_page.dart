@@ -8,11 +8,13 @@ class HomePage extends StatelessWidget {
   final ScrollController scrollController;
 
   final List<Product> products;
+  final bool isLoading;
 
   const HomePage({
     super.key,
     required this.scrollController,
     required this.products,
+    required this.isLoading,
   });
 
   @override
@@ -26,7 +28,7 @@ class HomePage extends StatelessWidget {
             children: [
               const CategoriesSection(),
               const ChangeLanguageSection(),
-              RecommendedSection(products: products),
+              RecommendedSection(products: products, isLoading: isLoading),
             ],
           ),
         ),

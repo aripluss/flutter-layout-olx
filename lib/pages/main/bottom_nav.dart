@@ -11,17 +11,7 @@ class BottomNav extends StatelessWidget {
     return BottomNavigationBar(
       currentIndex: currentIndex,
       onTap: onTap,
-
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Theme.of(
-        context,
-      ).bottomNavigationBarTheme.backgroundColor,
-      selectedItemColor: Theme.of(
-        context,
-      ).bottomNavigationBarTheme.selectedItemColor,
-      unselectedItemColor: Theme.of(
-        context,
-      ).bottomNavigationBarTheme.unselectedItemColor,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home_outlined, size: 20),

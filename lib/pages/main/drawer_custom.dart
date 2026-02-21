@@ -6,7 +6,6 @@ class DrawerCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Theme.of(context).drawerTheme.backgroundColor,
       child: ListView(
         children: [
           UserAccountsDrawerHeader(

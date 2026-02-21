@@ -7,6 +7,7 @@ final lightTheme = ThemeData(
     backgroundColor: Color(0xFFF2F4F5),
     foregroundColor: Color(0xFF02282C),
     elevation: 0,
+    surfaceTintColor: Colors.transparent,
   ),
 
   drawerTheme: DrawerThemeData(backgroundColor: Color(0xFFF2F4F5)),
@@ -42,7 +43,7 @@ final lightTheme = ThemeData(
     bodyLarge: TextStyle(
       color: Color(0xFF02282C),
       fontSize: 16,
-    ), // опис товару, назва продавця, назва міста
+    ), // опис товару, назва продавця, назва міста, категорія на сторінці товару
     bodyMedium: TextStyle(
       color: Color(0xFF02282C),
       fontSize: 14,

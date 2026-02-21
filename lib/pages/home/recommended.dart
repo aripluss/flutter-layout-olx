@@ -5,8 +5,13 @@ import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class RecommendedSection extends StatelessWidget {
   final List<Product> products;
+  final bool isLoading;
 
-  const RecommendedSection({super.key, required this.products});
+  const RecommendedSection({
+    super.key,
+    required this.products,
+    required this.isLoading,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +29,19 @@ class RecommendedSection extends StatelessWidget {
             'Рекомендоване вам',
             style: Theme.of(context).textTheme.headlineLarge,
           ),
+
           const SizedBox(height: 24),
-          ProductsGrid(products: products),
+
+          isLoading
+              ? SizedBox(
+                  height: 200,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).highlightColor,
+                    ),
+                  ),
+                )
+              : ProductsGrid(products: products),
         ],
       ),
     );

@@ -18,16 +18,8 @@ class FloatingActionBtn extends StatelessWidget {
       curve: Curves.easeOut,
       offset: isShown ? Offset.zero : const Offset(0, 3),
       child: FloatingActionButton(
+        // кольори автоматично підтягуються з теми
         shape: const CircleBorder(),
-        // НЕ ПРАЦЮЮТЬ КОЛЬОРИ !!
-        hoverColor: Theme.of(context).floatingActionButtonTheme.hoverColor,
-        focusColor: Theme.of(context).floatingActionButtonTheme.focusColor,
-        backgroundColor: Theme.of(
-          context,
-        ).floatingActionButtonTheme.backgroundColor,
-        foregroundColor: Theme.of(
-          context,
-        ).floatingActionButtonTheme.foregroundColor,
         child: const Icon(Icons.arrow_upward),
         onPressed: () {
           controller?.animateTo(
