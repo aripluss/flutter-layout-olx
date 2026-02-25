@@ -34,6 +34,7 @@ class ProductCard extends StatelessWidget {
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             // image
             Hero(
@@ -54,65 +55,68 @@ class ProductCard extends StatelessWidget {
             ),
 
             // info
-            Padding(
-              padding: const EdgeInsets.all(AppDimensions.padding16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // title
-                        Expanded(
-                          child: Text(
-                            product.title,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(
-                              context,
-                            ).textTheme.bodyMedium?.copyWith(height: 1.2),
+            Expanded(
+              flex: 114,
+              child: Padding(
+                padding: const EdgeInsets.all(AppDimensions.padding16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // title
+                          Expanded(
+                            child: Text(
+                              product.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.copyWith(height: 1.2),
+                            ),
                           ),
-                        ),
 
-                        SizedBox(width: 16),
+                          SizedBox(width: 16),
 
-                        // favorite button
-                        FavoriteButton(size: 16, product: product),
-                      ],
+                          // favorite button
+                          FavoriteButton(size: 16, product: product),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 12),
+                    Spacer(),
 
-                  // price
-                  Text(
-                    '${product.price} грн',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
+                    // price
+                    Text(
+                      '${product.price} грн',
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 12),
+                    Spacer(),
 
-                  // location
-                  Text(
-                    product.city,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(height: 1.2),
-                  ),
+                    // location
+                    Text(
+                      product.city,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(height: 1.2),
+                    ),
 
-                  // time
-                  Text(
-                    product.time,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodyMedium?.copyWith(height: 1.2),
-                  ),
-                ],
+                    // time
+                    Text(
+                      product.time,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(height: 1.2),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

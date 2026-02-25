@@ -45,30 +45,32 @@ class CategoriesGrid extends StatelessWidget {
       ),
       itemCount: 8,
       itemBuilder: (context, index) {
-        return Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                shape: BoxShape
-                    .circle, // same as borderRadius: BorderRadius.circular(100),
-                color: Theme.of(context).highlightColor,
+        return Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  shape: BoxShape
+                      .circle, // same as borderRadius: BorderRadius.circular(100),
+                  color: Theme.of(context).highlightColor,
+                ),
+                alignment: Alignment.center,
+                child: Text("SVG", style: const TextStyle(color: Colors.white)),
               ),
-              alignment: Alignment.center,
-              child: Text("SVG", style: const TextStyle(color: Colors.white)),
-            ),
 
-            const SizedBox(height: 8),
+              Spacer(),
 
-            Text(
-              'Категорія товарів №${index + 1}',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+              Text(
+                'Категорія товарів №${index + 1}',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+          ),
         );
       },
     );

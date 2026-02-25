@@ -39,7 +39,7 @@ class FakeStoreService implements ProductService {
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
 
-        // await Future.delayed(const Duration(seconds: 5)); // імітація затримки мережі
+        // await Future.delayed(const Duration(seconds: 5),); // імітація затримки мережі
 
         return data.map((item) => Product.fromFakeStore(item)).toList();
       } else {
