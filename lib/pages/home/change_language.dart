@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ChangeLanguageSection extends StatelessWidget {
@@ -9,7 +8,9 @@ class ChangeLanguageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColors.border, width: 1)),
+        border: Border(
+          bottom: BorderSide(color: Theme.of(context).dividerColor, width: 1),
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -21,14 +22,14 @@ class ChangeLanguageSection extends StatelessWidget {
             Text(
               "Змінити мову:",
               style: TextStyle(
-                color: AppColors.secondaryText,
-                fontSize: AppDimensions.font14,
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: Theme.of(context).textTheme.headlineMedium!.fontSize,
               ),
             ),
             TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
-                foregroundColor: AppColors.text,
+                foregroundColor: Theme.of(context).textTheme.bodyMedium!.color,
                 fixedSize: const Size.fromHeight(54),
               ),
               child: const Text("Укр"),
@@ -36,7 +37,7 @@ class ChangeLanguageSection extends StatelessWidget {
             TextButton(
               onPressed: () {},
               style: TextButton.styleFrom(
-                foregroundColor: AppColors.text,
+                foregroundColor: Theme.of(context).textTheme.bodyMedium!.color,
                 fixedSize: const Size.fromHeight(54),
               ),
               child: const Text("Англ"),

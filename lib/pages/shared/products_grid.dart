@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
-import 'package:flutter_layout_olx/pages/home/product_card.dart';
+import 'package:flutter_layout_olx/pages/shared/product_card.dart';
 
 class ProductsGrid extends StatelessWidget {
   final List<Product> products;

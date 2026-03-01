@@ -1,5 +1,3 @@
-import 'dart:math';
-import 'package:uuid/uuid.dart';
 import 'package:intl/intl.dart';
 
 class Product {
@@ -9,6 +7,8 @@ class Product {
   final String city;
   final String time;
   final String description;
+  final String image;
+  final String category;
 
   const Product({
     required this.id,
@@ -17,25 +17,38 @@ class Product {
     required this.city,
     required this.time,
     required this.description,
+    required this.image,
+    required this.category,
   });
-}
 
-List<Product> generateProductsMock() {
-  const uuid = Uuid();
-  final randomInt = Random();
-  final now = DateTime.now();
-  final timeFormat = DateFormat('Сьогодні о HH:mm');
-
-  return List.generate(14, (index) {
-    final id = uuid.v4();
-
+  factory Product.fromDummyJson(Map<String, dynamic> json) {
     return Product(
-      id: id,
-      title: 'Заголовок об\'яви номер ${index + 1}',
-      price: randomInt.nextInt(3000) + 100,
+      id: json['id'].toString(),
+      title: json['title'],
+      price: (json['price'] as num).round() * 43,
+      // конвертація в гривні (приблизно)
       city: 'Рандомне місто',
-      time: timeFormat.format(now),
-      description: 'Опис товару з індексом ${index + 1} та id $id',
+      time: json['meta']?['createdAt'] != null
+          ? DateFormat(
+              'dd.MM.yyyy HH:mm',
+            ).format(DateTime.parse(json['meta']['createdAt']))
+          : '',
+      description: json['description'],
+      image: json['images'][0],
+      category: json['category'],
     );
-  });
+  }
+
+  factory Product.fromFakeStore(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'].toString(),
+      title: json['title'],
+      price: (json['price'] as num).round() * 43,
+      city: 'Рандомне місто',
+      time: DateFormat('dd.MM.yyyy HH:mm').format(DateTime.now()),
+      description: json['description'],
+      image: json['image'],
+      category: json['category'],
+    );
+  }
 }

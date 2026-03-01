@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
-import 'package:flutter_layout_olx/theme/colors.dart';
 import 'package:flutter_layout_olx/pages/home/categories_grid.dart';
 import 'package:flutter_layout_olx/pages/home/change_language.dart';
 import 'package:flutter_layout_olx/pages/home/recommended.dart';
@@ -9,17 +8,19 @@ class HomePage extends StatelessWidget {
   final ScrollController scrollController;
 
   final List<Product> products;
+  final bool isLoading;
 
   const HomePage({
     super.key,
     required this.scrollController,
     required this.products,
+    required this.isLoading,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.body,
+      color: Theme.of(context).colorScheme.surface,
       child: SafeArea(
         child: SingleChildScrollView(
           controller: scrollController,
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
             children: [
               const CategoriesSection(),
               const ChangeLanguageSection(),
-              RecommendedSection(products: products),
+              RecommendedSection(products: products, isLoading: isLoading),
             ],
           ),
         ),
