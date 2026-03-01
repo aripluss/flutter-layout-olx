@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_layout_olx/models/chats.dart';
 import 'package:flutter_layout_olx/theme/theme-data.dart';
 import 'package:flutter_layout_olx/theme/theme-notifier.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeNotifier()),
         ChangeNotifierProvider(create: (_) => FavoritesModel()),
+        ChangeNotifierProvider(create: (_) => Chats()),
       ],
       child: const MainApp(),
     ),
@@ -25,10 +27,12 @@ class MainApp extends StatelessWidget {
     final themeNotifier = context.watch<ThemeNotifier>();
 
     return MaterialApp(
+      title: 'Flutter OLX',
       theme: lightTheme,
       darkTheme: darkTheme,
       themeMode: themeNotifier.currentTheme,
-      home: const MainPage(),
+      initialRoute: '/',
+      routes: {'/': (context) => const MainPage()},
     );
   }
 }

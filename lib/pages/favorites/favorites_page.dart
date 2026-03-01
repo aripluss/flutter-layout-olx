@@ -41,7 +41,19 @@ class FavoritesPage extends StatelessWidget {
                           ],
                         ),
                       )
-                    : ProductsGrid(products: favoriteProductsList);
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 12.0),
+                            child: Text(
+                              'Вподобані товари',
+                              style: Theme.of(context).textTheme.headlineLarge,
+                            ),
+                          ),
+                          ProductsGrid(products: favoriteProductsList),
+                        ],
+                      );
               },
             ),
           ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
+import 'package:flutter_layout_olx/models/chat.dart';
+import 'package:flutter_layout_olx/pages/chats/chat_detail_page.dart';
+import 'package:flutter_layout_olx/pages/product/product_page.dart';
 import 'package:flutter_layout_olx/services/api_service.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
-import 'package:flutter_layout_olx/pages/chat/chat_page.dart';
+import 'package:flutter_layout_olx/pages/chats/chats_page.dart';
 import 'package:flutter_layout_olx/pages/createAd/create_ad_page.dart';
 import 'package:flutter_layout_olx/pages/favorites/favorites_page.dart';
 import 'package:flutter_layout_olx/pages/home/home_page.dart';
@@ -30,8 +33,12 @@ class _MainPageState extends State<MainPage> {
   bool isLoading = true;
 
   // Page switching
-  final PageController _pageController = PageController();
+  // ключі для Nested Navigator
+  final _homeKey = GlobalKey<NavigatorState>();
+  final _favoritesKey = GlobalKey<NavigatorState>();
+  final _chatsKey = GlobalKey<NavigatorState>();
   int _currentIndex = 0;
+
   // FAB
   final ScrollController _homeScrollController = ScrollController();
   final ScrollController _favoritesScrollController = ScrollController();
@@ -74,57 +81,39 @@ class _MainPageState extends State<MainPage> {
         isLoading = false;
       });
     } catch (error) {
-      print('Помилка fetchProducts(): $error');
       setState(() {
         isLoading = false;
       });
     }
   }
 
-  // через then/catchError
-  // void _loadProducts() {
-  //   productService
-  //       .fetchProducts()
-  //       .then((result) {
-  //         setState(() {
-  //           products = result;
-  //           isLoading = false;
-  //         });
-  //       })
-  //       .catchError((error) {
-  //         print('Помилка fetchProducts(): $error');
-  //       });
+  // BottomNav logic
+  // Navigator для поточної вкладки
+  // NavigatorState _currentNavigator() {
+  //   switch (_currentIndex) {
+  //     case 0:
+  //       return _homeKey.currentState!;
+  //     case 1:
+  //       return _favoritesKey.currentState!;
+  //     case 3:
+  //       return _chatsKey.currentState!;
+  //     case 4:
+  //       return _profileKey.currentState!;
+  //     default:
+  //       return _homeKey.currentState!;
+  //   }
   // }
 
-  // BottomNav logic
   void _onNavTap(int index) {
     if (_currentIndex == index) return;
-
     setState(() {
       _currentIndex = index;
       _showFab = false;
     });
-
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeOut,
-    );
-  }
-
-  // Swipe logic
-  void _onPageChanged(int index) {
-    if (_currentIndex != index) {
-      setState(() {
-        _currentIndex = index;
-        _showFab = false;
-      });
-    }
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
     _homeScrollController.dispose();
     _favoritesScrollController.dispose();
     super.dispose();
@@ -157,22 +146,131 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
 
-      endDrawer: DrawerCustom(),
+      endDrawer: DrawerCustom(
+        onTabSelected: (index) {
+          setState(() {
+            _currentIndex = index;
+            _showFab = false;
+          });
+        },
+      ),
 
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: _onPageChanged,
-        children: [
-          HomePage(
-            scrollController: _homeScrollController,
-            products: products,
-            isLoading: isLoading,
-          ),
-          FavoritesPage(scrollController: _favoritesScrollController),
-          CreateAdPage(),
-          ChatPage(),
-          ProfilePage(),
-        ],
+      body: PopScope(
+        // canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          // final navigator = _currentNavigator();
+
+          //   if (navigator.canPop()) {
+          //     debugPrint('→ Popping nested route');
+          //     navigator.pop();
+          //     return;
+          //   }
+
+          //   if (_currentIndex != 0) {
+          //     debugPrint('→ Switching to Home tab');
+          //     setState(() => _currentIndex = 0);
+          //     return;
+          //   }
+
+          //   debugPrint('→ Nothing to pop, app will close');
+          // },
+          //   canPop: true,
+          // canPop: false,
+          // onPopInvokedWithResult: (didPop, result) =>
+          //     _currentNavigator().maybePop(),
+          // onPopInvokedWithResult: (didPop, result) async {
+          //   final currentNavigator = _currentNavigator();
+          //   if (currentNavigator.canPop()) {
+          //     return currentNavigator.pop();
+          //   }
+        },
+        child: IndexedStack(
+          index: _currentIndex,
+          children: [
+            // Home
+            Navigator(
+              key: _homeKey,
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case '/':
+                    return MaterialPageRoute(
+                      builder: (_) => HomePage(
+                        scrollController: _homeScrollController,
+                        products: products,
+                        isLoading: isLoading,
+                      ),
+                    );
+                  case '/product':
+                    final product = settings.arguments as Product;
+                    return MaterialPageRoute(
+                      builder: (_) => ProductPage(
+                        product: product,
+                        heroTag: 'product-image-${product.id}',
+                        navigatorKey: _homeKey,
+                      ),
+                    );
+                  default:
+                    return null;
+                }
+              },
+            ),
+
+            // Favorites
+            Navigator(
+              key: _favoritesKey,
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case '/':
+                    return MaterialPageRoute(
+                      builder: (_) => FavoritesPage(
+                        scrollController: _favoritesScrollController,
+                      ),
+                    );
+                  default:
+                    return null;
+                }
+              },
+            ),
+
+            CreateAdPage(),
+
+            // Chats
+            Navigator(
+              key: _chatsKey,
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case '/':
+                    return MaterialPageRoute(
+                      builder: (_) => ChatsPage(navigatorKey: _chatsKey),
+                    );
+                  case '/chat_detail':
+                    final chat = settings.arguments as Chat;
+                    return MaterialPageRoute(
+                      builder: (_) => ChatDetailPage(
+                        chat: chat,
+                        navigatorKey: _chatsKey,
+                        service: productService,
+                      ),
+                    );
+                  case '/product':
+                    final product = settings.arguments as Product;
+                    return MaterialPageRoute(
+                      builder: (_) => ProductPage(
+                        product: product,
+                        heroTag: 'product-image-${product.id}',
+                        navigatorKey: _chatsKey,
+                      ),
+                    );
+                  default:
+                    return null;
+                }
+              },
+            ),
+
+            // Profile
+            ProfilePage(),
+          ],
+        ),
       ),
 
       floatingActionButton: FloatingActionBtn(

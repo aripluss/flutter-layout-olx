@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/pages/product/product_page.dart';
 import 'package:flutter_layout_olx/pages/shared/favorite_button.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 
 class ProductCard extends StatelessWidget {
+  final GlobalKey<NavigatorState>? navigatorKey;
   final int index;
   final Product product;
 
-  const ProductCard({super.key, required this.index, required this.product});
+  const ProductCard({
+    super.key,
+    required this.index,
+    required this.product,
+    this.navigatorKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +56,14 @@ class ProductCard extends StatelessWidget {
                       topRight: Radius.circular(8),
                     ),
                   ),
-                  child: Image.network(product.image, fit: BoxFit.cover),
+                  child: CachedNetworkImage(
+                    imageUrl: product.image,
+                    placeholder: (context, url) => CircularProgressIndicator(
+                      color: Theme.of(context).highlightColor,
+                    ),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
+                  // Image.network(product.image, fit: BoxFit.cover),
                 ),
               ),
             ),

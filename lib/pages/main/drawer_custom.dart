@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class DrawerCustom extends StatelessWidget {
-  const DrawerCustom({super.key});
+  final void Function(int index) onTabSelected;
+
+  const DrawerCustom({super.key, required this.onTabSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,10 @@ class DrawerCustom extends StatelessWidget {
               'Мій профіль',
               style: TextStyle(color: Theme.of(context).colorScheme.primary),
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              onTabSelected(4);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.list_alt_outlined),
