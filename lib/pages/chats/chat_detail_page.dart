@@ -97,14 +97,6 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       '/product',
                       arguments: _product,
                     );
-                    // if (_product != null) {
-                    //   widget.navigatorKey.currentState!.pushNamed(
-                    //     '/product',
-                    //     arguments: {
-                    //       'product': _product!,
-                    //       'heroTag': 'product-image-${_product!.id}',
-                    //     },
-                    //   );
                   }
                 },
                 child: _product == null

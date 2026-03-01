@@ -23,16 +23,22 @@ class ProductPage extends StatelessWidget {
     String productId,
     String sellerId,
   ) async {
+    final chats = context.read<Chats>();
+    final messenger = ScaffoldMessenger.of(context);
+
     final result = await showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
       builder: (_) => ChatBottomSheet(productId: productId, sellerId: sellerId),
     );
 
-    if (result != null && result.isNotEmpty) {
-      context.read<Chats>().addMessage(productId, sellerId, result);
+    if (result != null) {
+      chats.addMessage(productId, sellerId, result);
 
-      ScaffoldMessenger.of(context).showSnackBar(
+      await Future.delayed(
+        const Duration(milliseconds: 250),
+      ); // затримка поки клавіатура закриється
+      messenger.showSnackBar(
         const SnackBar(
           content: Text('Повідомлення відправлено ✅'),
           duration: Duration(seconds: 2),

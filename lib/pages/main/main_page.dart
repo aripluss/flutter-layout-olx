@@ -89,20 +89,18 @@ class _MainPageState extends State<MainPage> {
 
   // BottomNav logic
   // Navigator для поточної вкладки
-  // NavigatorState _currentNavigator() {
-  //   switch (_currentIndex) {
-  //     case 0:
-  //       return _homeKey.currentState!;
-  //     case 1:
-  //       return _favoritesKey.currentState!;
-  //     case 3:
-  //       return _chatsKey.currentState!;
-  //     case 4:
-  //       return _profileKey.currentState!;
-  //     default:
-  //       return _homeKey.currentState!;
-  //   }
-  // }
+  NavigatorState _currentNavigator() {
+    switch (_currentIndex) {
+      case 0:
+        return _homeKey.currentState!;
+      case 1:
+        return _favoritesKey.currentState!;
+      case 3:
+        return _chatsKey.currentState!;
+      default:
+        return _homeKey.currentState!;
+    }
+  }
 
   void _onNavTap(int index) {
     if (_currentIndex == index) return;
@@ -156,33 +154,22 @@ class _MainPageState extends State<MainPage> {
       ),
 
       body: PopScope(
-        // canPop: false,
-        onPopInvokedWithResult: (didPop, result) async {
-          // final navigator = _currentNavigator();
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          final navigator = _currentNavigator();
 
-          //   if (navigator.canPop()) {
-          //     debugPrint('→ Popping nested route');
-          //     navigator.pop();
-          //     return;
-          //   }
+          if (navigator.canPop()) {
+            navigator.pop();
+            return;
+          }
 
-          //   if (_currentIndex != 0) {
-          //     debugPrint('→ Switching to Home tab');
-          //     setState(() => _currentIndex = 0);
-          //     return;
-          //   }
-
-          //   debugPrint('→ Nothing to pop, app will close');
-          // },
-          //   canPop: true,
-          // canPop: false,
-          // onPopInvokedWithResult: (didPop, result) =>
-          //     _currentNavigator().maybePop(),
-          // onPopInvokedWithResult: (didPop, result) async {
-          //   final currentNavigator = _currentNavigator();
-          //   if (currentNavigator.canPop()) {
-          //     return currentNavigator.pop();
-          //   }
+          if (_currentIndex != 0) {
+            setState(() {
+              _currentIndex = 0;
+            });
+            return;
+          }
+          Navigator.of(context).pop();
         },
         child: IndexedStack(
           index: _currentIndex,
@@ -198,15 +185,6 @@ class _MainPageState extends State<MainPage> {
                         scrollController: _homeScrollController,
                         products: products,
                         isLoading: isLoading,
-                      ),
-                    );
-                  case '/product':
-                    final product = settings.arguments as Product;
-                    return MaterialPageRoute(
-                      builder: (_) => ProductPage(
-                        product: product,
-                        heroTag: 'product-image-${product.id}',
-                        navigatorKey: _homeKey,
                       ),
                     );
                   default:
