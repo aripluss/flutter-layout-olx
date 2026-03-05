@@ -3,6 +3,7 @@ import 'package:flutter_layout_olx/data/products_data.dart';
 import 'package:flutter_layout_olx/models/chat.dart';
 import 'package:flutter_layout_olx/pages/chats/chat_detail_page.dart';
 import 'package:flutter_layout_olx/pages/product/product_page.dart';
+import 'package:flutter_layout_olx/pages/profile/my_ads_page.dart';
 import 'package:flutter_layout_olx/services/api_service.dart';
 import 'package:flutter_layout_olx/theme/dimensions.dart';
 import 'package:flutter_layout_olx/pages/chats/chats_page.dart';
@@ -37,6 +38,7 @@ class _MainPageState extends State<MainPage> {
   final _homeKey = GlobalKey<NavigatorState>();
   final _favoritesKey = GlobalKey<NavigatorState>();
   final _chatsKey = GlobalKey<NavigatorState>();
+  final _profileKey = GlobalKey<NavigatorState>();
   int _currentIndex = 0;
 
   // FAB
@@ -97,6 +99,8 @@ class _MainPageState extends State<MainPage> {
         return _favoritesKey.currentState!;
       case 3:
         return _chatsKey.currentState!;
+      case 4:
+        return _profileKey.currentState!;
       default:
         return _homeKey.currentState!;
     }
@@ -246,7 +250,26 @@ class _MainPageState extends State<MainPage> {
             ),
 
             // Profile
-            ProfilePage(),
+            Navigator(
+              key: _profileKey,
+              onGenerateRoute: (settings) {
+                switch (settings.name) {
+                  case '/':
+                    return MaterialPageRoute(
+                      builder: (_) => ProfilePage(navigatorKey: _profileKey),
+                    );
+                  case '/my_ads':
+                    return MaterialPageRoute(
+                      builder: (_) => MyAdsPage(
+                        navigatorKey: _profileKey,
+                        service: productService,
+                      ),
+                    );
+                  default:
+                    return null;
+                }
+              },
+            ),
           ],
         ),
       ),

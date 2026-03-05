@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  const ProfilePage({super.key, required this.navigatorKey});
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,13 @@ class ProfilePage extends StatelessWidget {
 
             const SizedBox(height: 24),
 
+            ListTile(
+              leading: const Icon(Icons.list_alt_outlined),
+              title: const Text("Мої оголошення"),
+              onTap: () {
+                navigatorKey.currentState!.pushNamed('/my_ads');
+              },
+            ),
             ListTile(
               leading: const Icon(Icons.settings_outlined),
               title: const Text("Налаштування"),
